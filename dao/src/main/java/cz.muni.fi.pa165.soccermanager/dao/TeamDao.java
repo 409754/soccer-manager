@@ -5,9 +5,9 @@ import cz.muni.fi.pa165.soccermanager.entity.Team;
 import java.util.List;
 
 public interface TeamDao {
-    Team fetchById(long teamId);
+    Team fetchById(Long teamId);
     List<Team> fetchAll();
-    void insert(Team player);
-    void update(Team player);
+    void insert(Team team);
+    void update(Team team);
     void delete(long teamId);
 }

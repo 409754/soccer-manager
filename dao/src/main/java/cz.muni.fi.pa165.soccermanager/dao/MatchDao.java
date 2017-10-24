@@ -7,7 +7,7 @@ import java.util.List;
 public interface MatchDao {
     Match fetchById(long matchId);
     List<Match> fetchAll();
-    void insert(Match player);
-    void update(Match player);
+    void insert(Match match);
+    void update(Match match);
     void delete(long matchId);
 }
