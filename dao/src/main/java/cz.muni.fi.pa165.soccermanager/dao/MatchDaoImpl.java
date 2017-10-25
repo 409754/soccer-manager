@@ -18,8 +18,8 @@ public class MatchDaoImpl implements MatchDao {
     private EntityManager manager;
 
     @Override
-    public Match fetchById(long MatchId) {
-        return manager.find(Match.class, MatchId);
+    public Match fetchById(long matchId) {
+        return manager.find(Match.class, matchId);
     }
 
     @Override

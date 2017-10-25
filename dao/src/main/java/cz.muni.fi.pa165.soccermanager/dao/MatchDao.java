@@ -4,7 +4,6 @@ import cz.muni.fi.pa165.soccermanager.entity.Match;
 
 import java.util.List;
 
-
 public interface MatchDao {
     /**
      * @return found match if exists, null otherwise

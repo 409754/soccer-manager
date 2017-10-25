@@ -3,18 +3,19 @@ package cz.muni.fi.pa165.soccermanager.entity;
 import javax.persistence.*;
 import java.util.Date;
 
+@Entity
 public class Match {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    //homeTeam, awayTeam, place, date, homeTeamGoalsScored, awayTeamGoalsScored
-
     @Temporal(TemporalType.DATE)
     private Date date;
-    private String stadium; // TODO: define enum of stadiums
+    private String stadium;
+    @ManyToOne
     private Team homeTeam;
+    @ManyToOne
     private Team awayTeam;
     private boolean finished;
     private int homeTeamGoals;
@@ -99,13 +100,13 @@ public class Match {
         String string = "Match {" +
                 "id=" + getId() +
                 ", date=" + getDate() + '\'' +
-                ", home team=" + getHomeTeam() +
+                "home team=" + getHomeTeam() +
                 ", away team=" + getAwayTeam() +
                 ", stadium=" + getStadium() + '\'';
         if (isFinished())
-            string += ", result=" + getHomeTeamGoals() + ':' + getAwayTeamGoals() + " }\'";
+            string += "result=" + getHomeTeamGoals() + ':' + getAwayTeamGoals() + " }\'";
         else
-            string += ", match was not finished yet }\'";
+            string += "match was not finished yet }\'";
         return string;
     }
 
