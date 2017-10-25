@@ -5,7 +5,6 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 import java.util.List;
 
 /**
@@ -20,15 +19,14 @@ public class TeamDaoImpl implements TeamDao {
     private EntityManager manager;
 
     @Override
-    public Team fetchById(Long teamId) {
+    public Team fetchById(long teamId) {
         return manager.find(Team.class, teamId);
     }
 
     @Override
     public List<Team> fetchAll() {
-        TypedQuery<Team> query = manager.createQuery(
-                "SELECT t FROM Team t", Team.class);
-        return query.getResultList();
+        return manager.createQuery(
+                "SELECT t FROM Team t", Team.class).getResultList();
     }
 
     @Override
@@ -39,7 +37,6 @@ public class TeamDaoImpl implements TeamDao {
     @Override
     public void update(Team team) {
         manager.merge(team);
-
     }
 
     @Override

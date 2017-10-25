@@ -18,7 +18,7 @@ public interface TeamDao {
      * @param teamId id of desired team
      * @return team retrieved from db
      */
-    Team fetchById(Long teamId);
+    Team fetchById(long teamId);
 
     /**
      * Retrieves all teams from db
