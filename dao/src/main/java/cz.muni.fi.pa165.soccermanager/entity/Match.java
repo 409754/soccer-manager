@@ -6,6 +6,47 @@ import java.util.Date;
 @Entity
 public class Match {
 
+    public static class MatchBuilder {
+
+        private Date date;
+        private String stadium;
+        private final Team homeTeam;
+        private final Team awayTeam;
+        private boolean finished;
+        private int homeTeamGoals;
+        private int awayTeamGoals;
+
+        public MatchBuilder(Team homeTeam, Team awayTeam) {
+            this.homeTeam = homeTeam;
+            this.awayTeam = awayTeam;
+        }
+
+        public MatchBuilder date(Date date) {
+            this.date = date;
+            return this;
+        }
+
+        public MatchBuilder stadium(String stadium) {
+            this.stadium = stadium;
+            return this;
+        }
+
+        public MatchBuilder finished(boolean finished) {
+            this.finished = finished;
+            return this;
+        }
+
+        public MatchBuilder homeTeamGoals(int homeTeamGoals) {
+            this.homeTeamGoals = homeTeamGoals;
+            return this;
+        }
+
+        public MatchBuilder awayTeamGoals(int awayTeamGoals) {
+            this.awayTeamGoals = awayTeamGoals;
+            return this;
+        }
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
@@ -17,23 +58,13 @@ public class Match {
     private Team homeTeam;
     @ManyToOne
     private Team awayTeam;
+    @Column(nullable = false)
     private boolean finished;
+    @Column(nullable = false)
     private int homeTeamGoals;
+    @Column(nullable = false)
     private int awayTeamGoals;
 
-
-    public Match() {
-    }
-
-    public Match(Date date, String stadium, Team homeTeam, Team awayTeam) {
-        this.date = date;
-        this.stadium = stadium;
-        this.homeTeam = homeTeam;
-        this.awayTeam = awayTeam;
-        finished = false;
-        homeTeamGoals = 0;
-        awayTeamGoals = 0;
-    }
 
     public long getId() { return id; }
 
