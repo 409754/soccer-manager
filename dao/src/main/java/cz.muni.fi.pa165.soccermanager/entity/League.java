@@ -12,9 +12,9 @@ public class League {
     private String country;
 
 
-    //List<Match> matches;
 
-    ArrayList<Match> matches = new ArrayList<Match>();
+
+    List matches = new ArrayList<>();
 
 
 
@@ -61,8 +61,8 @@ public class League {
 
         League league = (League) o;
 
-      //  if (getCountry() != league.getCountry()) return false;
-        if (getId() != null ? !getId().equals(league.getId()) : league.getId() != null) return false;
+
+
         if (getName() != null ? !getName().equals(league.getName()) : league.getName() != null) return false;
         return getCountry() != null ? getCountry().equals(league.getCountry()) : league.getCountry() == null;
     }
