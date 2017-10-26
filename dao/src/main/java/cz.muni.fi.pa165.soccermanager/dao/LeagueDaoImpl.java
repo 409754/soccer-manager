@@ -3,11 +3,10 @@ package cz.muni.fi.pa165.soccermanager.dao;
 import cz.muni.fi.pa165.soccermanager.entity.League;
 
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
-public class LeagueDaoImpl implements LeagueDao{
+public class LeagueDaoImpl implements LeagueDao {
 
     //@PersistenceContext
     private EntityManager manager;
@@ -15,12 +14,12 @@ public class LeagueDaoImpl implements LeagueDao{
 
     @Override
     public League fetchById(long leagueId) {
-        return manager.find(league.class, leagueId);
+        return manager.find(League.class, leagueId);
     }
 
     @Override
     public List<League> fetchAll() {
-        TypedQuery<League> query = manager.createQuery("SELECT p FROM league p", league.class);
+        TypedQuery<League> query = manager.createQuery("SELECT p FROM league p", League.class);
         return query.getResultList();
     }
 
