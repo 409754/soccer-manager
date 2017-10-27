@@ -1,8 +1,19 @@
 package cz.muni.fi.pa165.soccermanager.entity;
 
 import javax.persistence.*;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
+
+/**
+ * @author 456519 Filip Lux
+ * @version 10/27/2017.
+ * Class represents one match. Every Match has home and away team and date, all three attributes have to be be set.
+ * There is a stadium, where is the event held. After the Match is finished, match score is stored in
+ * here. Result of the match is computed by function that is owned by the class.
+ * You should use TeamBuilder to create instances of Team.
+ */
 @Entity
 public class Match {
 
@@ -12,18 +23,11 @@ public class Match {
         private String stadium;
         private final Team homeTeam;
         private final Team awayTeam;
-        private boolean finished;
-        private int homeTeamGoals;
-        private int awayTeamGoals;
 
-        public MatchBuilder(Team homeTeam, Team awayTeam) {
+        public MatchBuilder(Team homeTeam, Team awayTeam, Date date) {
             this.homeTeam = homeTeam;
             this.awayTeam = awayTeam;
-        }
-
-        public MatchBuilder date(Date date) {
             this.date = date;
-            return this;
         }
 
         public MatchBuilder stadium(String stadium) {
@@ -31,20 +35,22 @@ public class Match {
             return this;
         }
 
-        public MatchBuilder finished(boolean finished) {
-            this.finished = finished;
-            return this;
+        public Match build() {
+            return new Match(this);
         }
 
-        public MatchBuilder homeTeamGoals(int homeTeamGoals) {
-            this.homeTeamGoals = homeTeamGoals;
-            return this;
-        }
+    }
 
-        public MatchBuilder awayTeamGoals(int awayTeamGoals) {
-            this.awayTeamGoals = awayTeamGoals;
-            return this;
-        }
+    public Match() { }
+
+    private Match(MatchBuilder builder) {
+        homeTeam = builder.homeTeam;
+        awayTeam = builder.awayTeam;
+        date = builder.date;
+        stadium = builder.stadium;
+        finished = false;
+        homeTeamGoals = 0;
+        awayTeamGoals = 0;
     }
 
     @Id
@@ -53,17 +59,31 @@ public class Match {
 
     @Temporal(TemporalType.DATE)
     private Date date;
+
     private String stadium;
+
     @ManyToOne
+    @Column(nullable = false)
     private Team homeTeam;
+
     @ManyToOne
+    @Column(nullable = false)
     private Team awayTeam;
+
     @Column(nullable = false)
     private boolean finished;
+
     @Column(nullable = false)
     private int homeTeamGoals;
+
     @Column(nullable = false)
     private int awayTeamGoals;
+
+    /**
+     * date of known value, used for testing
+     * set to 1st JANUARY 2017
+     */
+    private static final Date testDate = new GregorianCalendar(2017, Calendar.JANUARY, 1).getTime();
 
 
     public long getId() { return id; }
@@ -97,6 +117,16 @@ public class Match {
     public boolean isFinished() { return finished; }
 
     public void setFinished(boolean finished) { this.finished = finished; }
+
+    public void playMatch() {
+        /**
+         * sets score of the match by default values
+         * TODO: implement function that compute score of matches
+         */
+        setAwayTeamGoals(2);
+        setAwayTeamGoals(1);
+        setFinished(true);
+    }
 
     @Override
     public boolean equals(Object o) {

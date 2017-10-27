@@ -9,7 +9,8 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 
 /**
- * @author Filip Lux
+ * @author 456519 Filip Lux
+ * @version 10/27/2017
  */
 @Repository
 public class MatchDaoImpl implements MatchDao {
