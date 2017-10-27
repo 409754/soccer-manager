@@ -4,13 +4,14 @@ import cz.muni.fi.pa165.soccermanager.entity.League;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Repository
 public class LeagueDaoImpl implements LeagueDao {
 
-    //@PersistenceContext
+    @PersistenceContext
     private EntityManager manager;
 
 

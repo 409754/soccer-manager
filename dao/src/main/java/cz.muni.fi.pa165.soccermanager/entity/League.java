@@ -2,7 +2,16 @@ package cz.muni.fi.pa165.soccermanager.entity;
 
 import javax.persistence.*;
 import java.util.Collections;
-import java.util.Set;
+import java.util.List;
+
+
+/**
+ * @author 476368 Iman Mehmandoust
+ * @version 10/27/2017.
+ * Class representing leauges.
+ * set of teams, country and name of the league
+ * You should use LeagueBuilder to create instances of League.
+ */
 
 public class League {
 
@@ -11,16 +20,16 @@ public class League {
 
         private  String name;
         private  String country;
-        private Set<Match> matches;
+        private List<Match> matches;
 
 
-        public LeagueBuilder(String name, String country,Set<Match> matches) {
+        public LeagueBuilder(String name, String country,List<Match> matches) {
             this.name = name;
             this.country = country;
             this.matches=matches;
         }
 
-        public LeagueBuilder players(Set<Match> matches) {
+        public LeagueBuilder players(List<Match> matches) {
             this.matches = matches;
             return this;
         }
@@ -47,7 +56,10 @@ public class League {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column (nullable = false, unique = true)
     private String name;
+
+    @Column (nullable = false)
     private String country;
 
 
@@ -55,7 +67,7 @@ public class League {
     @JoinTable(name = "LEAGUE_MATCHES",
             joinColumns = @JoinColumn(name = "LEAGUE_ID"),
             inverseJoinColumns = @JoinColumn(name = "MATCH_ID"))
-    private Set<Match> matches;
+    private List<Match> matches;
 
 
     public League() {
@@ -91,11 +103,11 @@ public class League {
         this.country = country;
     }
 
-    public Set<Match> getMatches() {
+    public List<Match> getMatches() {
                 return Collections.unmodifiableSet(matches);
             }
 
-    public void setMatches(Set<Match> matches) {
+    public void setMatches(List<Match> matches) {
                 this.matches = matches;
             }
 
