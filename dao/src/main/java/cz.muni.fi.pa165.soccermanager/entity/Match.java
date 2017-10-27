@@ -1,6 +1,7 @@
 package cz.muni.fi.pa165.soccermanager.entity;
 
 import javax.persistence.*;
+import java.time.Clock;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -23,11 +24,13 @@ public class Match {
         private String stadium;
         private final Team homeTeam;
         private final Team awayTeam;
+        private Clock clock;
 
-        public MatchBuilder(Team homeTeam, Team awayTeam, Date date) {
+        public MatchBuilder(Team homeTeam, Team awayTeam, Date date, Clock clock) {
             this.homeTeam = homeTeam;
             this.awayTeam = awayTeam;
             this.date = date;
+            this.clock = clock;
         }
 
         public MatchBuilder stadium(String stadium) {
@@ -36,14 +39,14 @@ public class Match {
         }
 
         public Match build() {
-            return new Match(this);
+            return new Match(this, clock);
         }
 
     }
 
     public Match() { }
 
-    private Match(MatchBuilder builder) {
+    private Match(MatchBuilder builder, Clock newClock) {
         homeTeam = builder.homeTeam;
         awayTeam = builder.awayTeam;
         date = builder.date;
@@ -51,6 +54,7 @@ public class Match {
         finished = false;
         homeTeamGoals = 0;
         awayTeamGoals = 0;
+        clock = newClock;
     }
 
     @Id
@@ -79,12 +83,7 @@ public class Match {
     @Column(nullable = false)
     private int awayTeamGoals;
 
-    /**
-     * date of known value, used for testing
-     * set to 1st JANUARY 2017
-     */
-    private static final Date testDate = new GregorianCalendar(2017, Calendar.JANUARY, 1).getTime();
-
+    private Clock clock;
 
     public long getId() { return id; }
 
@@ -118,11 +117,11 @@ public class Match {
 
     public void setFinished(boolean finished) { this.finished = finished; }
 
+    /**
+     * sets score of the match by some default values
+     * TODO: implement function that compute score of matches
+     */
     public void playMatch() {
-        /**
-         * sets score of the match by default values
-         * TODO: implement function that compute score of matches
-         */
         setAwayTeamGoals(2);
         setAwayTeamGoals(1);
         setFinished(true);
