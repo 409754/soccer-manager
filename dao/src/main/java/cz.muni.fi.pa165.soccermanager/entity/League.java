@@ -104,7 +104,7 @@ public class League {
     }
 
     public List<Match> getMatches() {
-                return Collections.unmodifiableSet(matches);
+                return Collections.unmodifiableList(matches);
             }
 
     public void setMatches(List<Match> matches) {
