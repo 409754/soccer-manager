@@ -1,6 +1,7 @@
 package cz.muni.fi.pa165.soccermanager.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -20,7 +21,8 @@ public class League {
 
         private  String name;
         private  String country;
-        private List<Match> matches;
+
+        List matches = new ArrayList<>();
 
 
         public LeagueBuilder(String name, String country,List<Match> matches) {
@@ -29,7 +31,7 @@ public class League {
             this.matches=matches;
         }
 
-        public LeagueBuilder players(List<Match> matches) {
+        public LeagueBuilder players(List<League> matches) {
             this.matches = matches;
             return this;
         }
