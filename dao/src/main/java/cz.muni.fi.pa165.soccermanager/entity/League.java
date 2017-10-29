@@ -31,6 +31,11 @@ public class League {
             this.matches=matches;
         }
 
+        public LeagueBuilder(String name, String country) {
+            this.name = name;
+            this.country = country;
+        }
+
         public LeagueBuilder players(List<League> matches) {
             this.matches = matches;
             return this;
