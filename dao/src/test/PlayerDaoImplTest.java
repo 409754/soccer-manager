@@ -198,20 +198,20 @@ public class PlayerDaoImplTest {
     }
 
     private Player getTestPlayerOne() {
-        return new Player.PlayerBuilder(
-                new Player(),
-                new Player(),
-                new Player())
+        return new Player.PlayerBuilder()
                 .name("Cristiano Ronaldo")
+                .position("Striker")
+                .number(7)
+                .born(new Date())
                 .build();
     }
 
     private Player getTestPlayerTwo() {
-        return new Player.PlayerBuilder(
-                new Player(),
-                new Player(),
-                new Player())
-                .name("Gianluca Zambrotta")
+        return new Player.PlayerBuilder()
+                .name("Lio Messi")
+                .position("Striker")
+                .number(10)
+                .born(new Date())
                 .build();
     }
 
