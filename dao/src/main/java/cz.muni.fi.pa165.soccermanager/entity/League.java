@@ -13,7 +13,7 @@ import java.util.List;
  * set of teams, country and name of the league
  * You should use LeagueBuilder to create instances of League.
  */
-
+@Entity
 public class League {
 
     public static class LeagueBuilder {

@@ -22,7 +22,7 @@ public class LeagueDaoImpl implements LeagueDao {
 
     @Override
     public List<League> fetchAll() {
-        TypedQuery<League> query = manager.createQuery("SELECT l FROM league l", League.class);
+        TypedQuery<League> query = manager.createQuery("SELECT l FROM League l", League.class);
         return query.getResultList();
     }
 
